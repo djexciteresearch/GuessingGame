@@ -1,0 +1,54 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: url('background.png') no-repeat center center fixed;;
+	background-color: #000000;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	color: red;
+}
+input {
+	width: 250px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	color: #000;	
+}
+button {
+	color: green;
+}
+.spacer{
+	height: 32px;
+}
+.shallweplay {
+	width: 599px;
+	height: 71px;
+	background: url('shallweplay-599x71.jpg');
+	background-repeat: no-repeat;
+}
+.WOPR {
+	width: 150px;
+	height: 150px;
+	background: url('wopr-150x150-painted.png');
+}
+.guesses {
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 64px;
+	color: red;
+	}
+.guessesRemaining {
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	color: white;
+}
+.hotCold {
+	background-color: black;
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 32px;
+	color: #6098E3;	
+}
+.interactions {
+	text-align: center;
+}

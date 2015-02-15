@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -11,25 +12,69 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- main.css -->
 <link rel="stylesheet" href="main.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Guessing Game</title>
 </head>
 <body>
-	<div class="countainer">
-		<div class="row">
-			<div class="col-md-4 center-block">5</div>
+	<div class="container">
+	<!-- spacer --><div class="row"><div class="col-xs-12 col-sm12"><div class="spacer"> </div></div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 center-block">GUESSES<BR>REMAINING</div>
+			<div class="col-xs-12 col-sm12">
+				<div class="shallweplay center-block">
+					<div class="row"></div>
+				</div>
+			</div>
 		</div>
+	<!-- spacer --><div class="row"><div class="col-xs-12 col-sm12"><div class="spacer"> </div></div>
 		<div class="row">
-			<div class="col-md-4 center-block">You're very close.</div>
+			<div class="col-xs-12 col-sm12">
+				<div class="WOPR center-block">
+					<div class="row center-block">
+						<div class="guesses" id="guessed">
+						5
+						</div>
+					</div>
+					<div class="row guessesRemaining center-block">
+						GUESSES
+					</div>
+					<div class="row guessesRemaining center-block">
+						REMAINING
+					</div>
+				</div>
+			</div>
 		</div>
+	<!-- spacer --><div class="row"><div class="col-xs-12 col-sm12"><div class="spacer"> </div></div>
 		<div class="row">
-			<div class="col-md-4 center-block"><input></input><button>Enter</button></div>
+			<div class="col-xs-2 col-sm2"></div>
+			<div class="col-xs-8 col-sm8">
+				<div class="row">
+					<div class="hotCold" id="disposition">
+						> You're very close. Try again.
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-2 col-sm2"></div>
 		</div>
+	<!-- spacer --><div class="row"><div class="col-xs-12 col-sm12"><div class="spacer"> </div></div>
 		<div class="row">
-			<div class="col-md-4 center-block"><button>Play Again</button><button>Panic</button></div>
+			<div class="col-xs-3 col-sm3"></div>
+			<div class="col-xs-6 col-sm6 center-block">
+				<div class="interactions">
+					<input id="guess" type="text" value="Input a Number 1-100"/><button id="submit">Enter</button>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm3"></div>
+		</div>
+	<!-- spacer --><div class="row"><div class="col-xs-12 col-sm12"><div class="spacer"> </div></div>
+		<div class="row">
+			<div class="col-xs-3 col-sm3"></div>
+			<div class="col-xs-6 col-sm6 center-block">
+				<div class="interactions">
+					<button id="playAgain">Play Again</button><button id="hint">Panic</button>
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm3"></div>
 		</div>
 	</div>
 </body>
