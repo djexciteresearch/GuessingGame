@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: url('background.png') no-repeat center center fixed;;
-	background-color: #000000;
+	background-color: #070A0C;
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 24px;
 	color: red;
@@ -30,7 +30,7 @@ button {
 	height: 150px;
 	background: url('wopr-150x150-painted.png');
 }
-.guesses {
+.counter {
 	text-align: center;
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 64px;
