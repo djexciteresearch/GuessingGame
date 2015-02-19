@@ -52,3 +52,9 @@ button {
 .interactions {
 	text-align: center;
 }
+#guessList {
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 32px;
+	color: green;		
+}
