@@ -1,7 +1,11 @@
+@font-face { /* font is not working */
+    font-family: vt100-terminal-font;
+    src: url('glass_tty_vt220.woff'));
+}
 body {
 	margin: 0;
 	padding: 0;
-	background: url('background.png') no-repeat center center fixed;;
+	background: url('background.png') no-repeat center center fixed;
 	background-color: #070A0C;
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 24px;
@@ -45,16 +49,21 @@ button {
 .hotCold {
 	background-color: black;
 	text-align: center;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: vt100-terminal-font /* Helvetica Arial */;
 	font-size: 32px;
-	color: #6098E3;	
+	color: #6098E3;
+	text-transform: uppercase;
 }
 .interactions {
 	text-align: center;
 }
-#guessList {
+#listOfGuesses {
 	text-align: center;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 32px;
-	color: green;		
+	font-family: vt100-terminal-font /* Helvetica, Arial, sans-serif */;
+	font-size: 24px;
+	color: green;
+	text-transform: uppercase;    
+	-moz-text-decoration-style: double; /* Code for Firefox */
+    text-decoration: double;
+	
 }

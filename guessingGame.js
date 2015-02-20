@@ -15,9 +15,12 @@
  * [/] Create a button that provides the answer (Give me a Hint).
  * [/] Submit the guess by pressing enter 
  * [/] or clicking the submit button.
- * [!] After a user guesses a number keep a visual list of Hot and Cold answers that the user can see.
- * [ ] (extra credit) Change the background color, add an image, or do something creative when the user guesses the correct answer.
+ * [/] After a user guesses a number keep a visual list of Hot and Cold answers that the user can see.
+ * [/] Change the background color, add an image, or do something creative when the user guesses the correct answer.
  * [/] Prevent play after 1) countdown=0 2) guessSuccess
+ * [/] (extra credit) Use a special font
+ * [/] (extra credit) Modal of Youtube WARGAMES video http://youtu.be/bymdsSvLfJY
+ * <iframe width="560" height="315" src="https://www.youtube.com/embed/bymdsSvLfJY" frameborder="0" allowfullscreen></iframe>
  * [ ] (extra credit) Use images for the enter and panic button
  * [ ] (extra credit) document onload play audio "Shall we play a game"
  */
@@ -119,6 +122,7 @@ launcher.prototype.init = function(){
 	this.myNum = this.acquire();
 	this.updateClock(this.count);
 	this.display("> Guess the number I am thinking of.");
+	$("body").css("background-image", "url('background.png')");
 	console.log(this.myNum+" target(s) acquired!");
 }
 
@@ -134,56 +138,51 @@ launcher.prototype.updateClock = function(){
 	$("#guessed").html(this.count);
 }
 
-launcher.prototype.authenticate = function(num){
-	if(this.count<=0){
-		//Game Over Test - do nothing if game over else
-		this.GameOver = true;
-		console.log("ignition");
-		this.display("> Missile(s) launched! GAME OVER man... Play Again?");
-		//no need to 
-		//unset input.click.keydown submit.click hint.click
-	} else if (this.myNum == num) {
-		this.GameOver = true;
-		console.log(this.myNum, num);
-		//Guess Success Test - update display with success message else
-		this.display("> Code authenticated. Launch aborted. Play again?");
-	} else if ( this.GameOver != true ){
-		//update guest register
-		//decrease count
-		//update clock
-		//weigh response - evaluate guess
-		//update terminal display
-		//this.myNum == this.guesses[this.guesses.length-1]		
-		this.display(this.evalGuess(num));
-	} else {
-		this.display("Press the Panic Button!");
-	}
-
-	
-}
-
 launcher.prototype.display= function(text){
 	$("#disposition").html(text);
 }
 
+launcher.prototype.authenticate = function(num){	
+	if(this.count>1 && !this.GameOver){				//before last guess
+		this.decrease();
+		this.updateClock();
+		this.display(this.evalGuess(num));
+	} else if (this.count==1 && !this.GameOver){ 	//last guess - prime launcher
+		this.decrease();
+		this.updateClock();
+		this.display(this.evalGuess(num));
+		if(!this.GameOver){ 						//no more guesses - ignition KABOOM!!
+			this.GameOver = true;
+//			$("body").css("background", "red url('./background-gameover.png') no-repeat center center fixed;");
+			$("body").css("background-image", "url('background-gameover.png')");
+			this.display("> Impact Re-entry Vehicle(s) launched! GAME OVER man... Play Again?");
+		}
+	} else if (this.count==0 && !this.GameOver){ 	//no more guesses - Play Again
+		this.GameOver = true;
+		this.display("GAME OVER!!!\nClick Play Again?");
+	} else if (this.GameOver){ 						//!!!
+		this.display("GAME OVER!!!\nClick Play Again!");
+	}	
+}
+
 launcher.prototype.evalGuess = function(num){
 	var evalStr;
-
 	this.guesses.push(num);
-	//continue countdown, evaluate guess
-	this.decrease();
-	this.updateClock();
 	//was this number guessed before?
 	var sameAsPrev = false;
 	for(var i=0;i<this.guesses.length-1;i++){ //length-1 no curr guess
 		if (this.guesses[i] == num ){
-			console.log(this.guesses[i] , num);
+			//console.log(this.guesses[i] , num);
 			evalStr="> You guessed "+num+" before. Try Again.";
 			sameAsPrev = true;
 		}
 	}
 	//formulate response for incorrect guess
-	if(!sameAsPrev){
+	if(this.myNum==num){
+		evalStr = "> Code authenticated. Launch aborted. Play again?"
+		this.GameOver=true;
+		$("body").find('[data-toggle="modal"]').trigger("click")
+	} else if(!sameAsPrev){
 		evalStr="> Your guess is";
 		if (Math.abs(this.myNum - this.guesses[this.guesses.length-1]) < 10 ) {
 			evalStr+=" hot,";
@@ -209,7 +208,9 @@ launcher.prototype.evalGuess = function(num){
 		}
 		evalStr += " Try again.";
 	}
+	
 	this.displayHotColdList();
+	
 	return evalStr;
 }
 
@@ -223,15 +224,24 @@ launcher.prototype.displayHotColdList= function(){
 		str+=this.hotColdList[i]+", ";
 	}
 	//str.trim();
-	$("#guessList").innerHTML="TEST";//str.slice(0,-2);
-	console.log(str.slice(0,-2));
+	$("#listOfGuesses").html(str.slice(0,-2));
+}
+
+var primeVideoModal = function playYoutubeVideoModal(){
+	var trigger = $("body").find('[data-toggle="modal"]');
+	trigger.click(function() {
+		var theModal = $(this).data("target"),
+	    videoSRC = $(this).attr("data-theVideo"), 
+	    videoSRCauto = videoSRC+"?autoplay=1" ;
+	    $(theModal+' iframe').attr('src', videoSRCauto);
+	    $(theModal+' button.close').click(function () {
+	    	$(theModal+' iframe').attr('src', videoSRC);
+	    });   
+	});
 }
 
 var missile = new launcher();
 
 missile.init();
+primeVideoModal();
 primeControls(missile);
-
-
-
-
